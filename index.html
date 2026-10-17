@@ -1,0 +1,844 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20/10 - Lớp 12A 💗</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: white;
+  background: radial-gradient(
+    circle at top,
+    #62417e,
+    #272044 55%,
+    #101329
+  );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 15px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.screen.active {
+  display: flex;
+  animation: appear 0.8s ease;
+}
+
+.content {
+  width: min(850px, 100%);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: clamp(38px, 8vw, 75px);
+  color: #ffb6d9;
+  text-shadow: 0 0 25px #ff69b4;
+}
+
+h2 {
+  font-size: clamp(26px, 5vw, 42px);
+}
+
+p {
+  line-height: 1.8;
+}
+
+.lead {
+  max-width: 650px;
+  margin: 15px auto 25px;
+  color: #ffe7f3;
+}
+
+.btn {
+  padding: 13px 25px;
+  border: 1px solid #ffd3e8;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #ff8fc4, #df4e9b);
+  color: white;
+  box-shadow: 0 5px 25px #ff69b455;
+  transition: 0.25s;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* BẦU TRỜI SAO */
+
+#sky {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px white;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  to {
+    opacity: 0.2;
+    transform: scale(0.5);
+  }
+}
+
+/* NHẶT TRÁI TIM */
+
+.playfield {
+  position: relative;
+  height: 360px;
+  max-width: 650px;
+  margin: 20px auto;
+  overflow: hidden;
+  border: 1px solid #ffffff35;
+  border-radius: 25px;
+  background: #ffffff08;
+}
+
+.heart {
+  position: absolute;
+  top: -60px;
+  border: none;
+  background: none;
+  font-size: 45px;
+  filter: drop-shadow(0 0 12px #ff69b4);
+  animation: falling var(--duration) linear forwards;
+}
+
+@keyframes falling {
+  to {
+    top: 110%;
+    transform: rotate(25deg);
+  }
+}
+
+.progress {
+  height: 6px;
+  max-width: 300px;
+  margin: 12px auto;
+  border-radius: 10px;
+  background: #ffffff30;
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #ff9fc9;
+  transition: width 0.3s;
+}
+
+/* CÂY HOA TRÁI TIM */
+
+.tree {
+  height: 390px;
+  max-width: 650px;
+  margin: auto;
+}
+
+.tree svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.branch {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: grow 3s ease forwards;
+}
+
+@keyframes grow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bloom 1s cubic-bezier(.2, 1.5, .5, 1) both;
+}
+
+@keyframes bloom {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.flower-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.flower {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 1px solid #ffd4e8;
+  background: #ff8fc433;
+  font-size: 35px;
+  animation: bloom 1s both;
+}
+
+/* HOA RƠI */
+
+.falling-flower {
+  position: absolute;
+  top: 30%;
+  border: none;
+  background: none;
+  font-size: 42px;
+  filter: drop-shadow(0 0 12px #ff7db9);
+  animation: flowerFall 3.5s ease-in forwards;
+}
+
+@keyframes flowerFall {
+  to {
+    transform: translateY(230px) rotate(200deg);
+    opacity: 0;
+  }
+}
+
+/* SAO BĂNG */
+
+.meteor-area {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 750px;
+}
+
+.meteor {
+  position: absolute;
+  top: 10px;
+  left: -100px;
+  border: none;
+  background: transparent;
+  font-size: 55px;
+  z-index: 2;
+  filter: drop-shadow(0 0 15px #fff3a0);
+  animation: shooting 3.5s ease-in-out forwards;
+}
+
+/* VỆT SÁNG PHÍA SAU NGÔI SAO */
+
+.meteor::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 240px;
+  height: 9px;
+  right: 35px;
+  top: 28px;
+  transform: rotate(25deg);
+  transform-origin: right center;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ff77ce55,
+    #ff91df,
+    #fff6c5
+  );
+  box-shadow:
+    0 0 10px #ff8bd5,
+    0 0 25px #ff75c5,
+    0 0 40px #e7a4ff;
+}
+
+.meteor::after {
+  content: "";
+  position: absolute;
+  right: 35px;
+  top: 29px;
+  width: 180px;
+  height: 2px;
+  transform: rotate(25deg);
+  transform-origin: right center;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffffff,
+    #fff5b0
+  );
+}
+
+@keyframes shooting {
+  0% {
+    left: -100px;
+    top: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    left: 85%;
+    top: 220px;
+    opacity: 0.2;
+  }
+}
+
+/* THƯ CHÚC */
+
+.letter {
+  background: #fff8fc;
+  color: #693452;
+  text-align: left;
+  padding: 28px;
+  border-radius: 25px;
+  max-height: 65vh;
+  overflow-y: auto;
+  line-height: 1.8;
+}
+
+.letter h2 {
+  text-align: center;
+  color: #d84691;
+}
+
+.signature {
+  text-align: right;
+  color: #c23c82;
+  font-weight: bold;
+}
+
+/* HỘP LỜI CHÚC */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #100a25bb;
+  backdrop-filter: blur(8px);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-card {
+  width: min(480px, 100%);
+  padding: 28px;
+  border-radius: 25px;
+  background: #fff4fa;
+  color: #713250;
+  box-shadow: 0 15px 60px #0005;
+}
+
+.modal-card .emoji {
+  font-size: 50px;
+}
+
+@media (max-width: 500px) {
+  .tree {
+    height: 310px;
+  }
+
+  .playfield {
+    height: 300px;
+  }
+
+  .letter {
+    padding: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="sky"></div>
+
+<!-- MÀN HÌNH MỞ ĐẦU -->
+
+<section class="screen active" id="intro">
+  <div class="content">
+    <p>✨ MỘT MÓN QUÀ TỪ CÁC BẠN NAM LỚP 12A ✨</p>
+    <h1>Gửi những<br>bông hoa 12A 💗</h1>
+    <p class="lead">
+      Ba trái tim yêu thương, một cây hoa kỳ diệu
+      và một điều ước từ sao băng đang chờ bạn khám phá.
+    </p>
+    <button class="btn" onclick="startGame()">
+      Bắt đầu hành trình 💕
+    </button>
+  </div>
+</section>
+
+<!-- MÀN HÌNH NHẶT TIM -->
+
+<section class="screen" id="heartScreen">
+  <div class="content">
+    <h2>Nhặt đủ 3 trái tim 💗</h2>
+    <p class="lead">
+      Nhấn vào trái tim đang rơi để nhận lời chúc.
+    </p>
+
+    <strong>Đã nhặt: <span id="count">0</span>/3</strong>
+
+    <div class="progress">
+      <span id="bar"></span>
+    </div>
+
+    <div class="playfield" id="field"></div>
+  </div>
+</section>
+
+<!-- CÂY HOA TRÁI TIM -->
+
+<section class="screen" id="treeScreen">
+  <div class="content">
+    <h2>Cây hoa trái tim 🌸</h2>
+    <p class="lead">
+      Cây yêu thương lớn lên và nở những bông hoa
+      trái tim dành riêng cho các bạn nữ lớp 12A.
+    </p>
+
+    <div class="tree" id="tree">
+      <svg viewBox="0 0 600 430">
+        <defs>
+          <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#ffd4b3"/>
+            <stop offset="1" stop-color="#b86d9b"/>
+          </linearGradient>
+
+          <radialGradient id="petal">
+            <stop stop-color="#fff0fa"/>
+            <stop offset=".6" stop-color="#ffabd5"/>
+            <stop offset="1" stop-color="#e94d9c"/>
+          </radialGradient>
+        </defs>
+
+        <path class="branch"
+          d="M300 410 C285 340 315 290 300 240
+             M300 320 C245 285 210 245 175 205
+             M300 285 C355 250 390 210 420 165
+             M300 240 C330 200 340 165 340 125
+             M290 365 C245 345 215 320 185 290"
+          fill="none"
+          stroke="url(#wood)"
+          stroke-width="19"
+          stroke-linecap="round"/>
+
+        <g fill="url(#petal)" stroke="#ffd8ed" stroke-width="2">
+          <path class="bloom" style="animation-delay:.3s"
+            d="M210 170 C170 128 205 91 235 126
+               C267 88 303 127 255 171 L233 192Z"/>
+
+          <path class="bloom" style="animation-delay:.6s"
+            d="M315 140 C276 99 311 63 340 97
+               C372 60 408 99 360 143 L338 164Z"/>
+
+          <path class="bloom" style="animation-delay:.9s"
+            d="M390 190 C352 151 386 117 414 150
+               C447 113 480 153 434 195 L412 216Z"/>
+
+          <path class="bloom" style="animation-delay:1.2s"
+            d="M142 238 C105 199 138 164 166 196
+               C198 159 231 199 185 243 L164 263Z"/>
+
+          <path class="bloom" style="animation-delay:1.5s"
+            d="M250 245 C212 204 247 170 275 203
+               C307 166 341 206 294 250 L273 270Z"/>
+
+          <path class="bloom" style="animation-delay:1.8s"
+            d="M360 278 C323 240 356 205 384 237
+               C416 200 450 240 404 283 L382 304Z"/>
+
+          <path class="bloom" style="animation-delay:2s"
+            d="M203 315 C167 277 199 244 227 275
+               C258 239 291 278 246 320 L225 340Z"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="flower-buttons">
+      <button class="flower" onclick="openFlower(0)">💗</button>
+      <button class="flower" onclick="openFlower(1)">💗</button>
+    </div>
+
+    <p id="flowerStatus">Nhấn vào hai bông hoa để mở lời nhắn.</p>
+
+    <button class="btn" id="toStar"
+      style="display:none" onclick="showMeteor()">
+      Đón điều ước sao băng 🌠
+    </button>
+  </div>
+</section>
+
+<!-- SAO BĂNG -->
+
+<section class="screen" id="meteorScreen">
+  <div class="content">
+    <h2>Điều ước từ sao băng 🌠</h2>
+    <p class="lead">
+      Chạm vào ngôi sao đang bay qua bầu trời
+      để nhận món quà cuối cùng.
+    </p>
+
+    <div class="meteor-area" id="meteorArea"></div>
+
+    <button class="btn" onclick="launchMeteor()">
+      Gọi sao băng trở lại ✨
+    </button>
+  </div>
+</section>
+
+<!-- LỜI CHÚC CUỐI -->
+
+<section class="screen" id="finalScreen">
+  <div class="content">
+    <div class="letter">
+      <h2>💗 Gửi các bạn nữ thân yêu của lớp mình! 💗</h2>
+
+      <p>
+        Nhân ngày Phụ nữ Việt Nam 20/10, chúc tất cả các bạn nữ
+        luôn xinh tươi, vui vẻ, học giỏi và gặp thật nhiều may mắn
+        trong cuộc sống.
+      </p>
+
+      <p>
+        Chúc các bạn lúc nào cũng rạng rỡ như những bông hoa,
+        luôn tự tin vào bản thân và đạt được những điều mình mong muốn.
+        Mong rằng mỗi ngày đến trường của chúng ta đều có thật nhiều
+        tiếng cười, niềm vui và những kỉ niệm đẹp bên nhau.
+      </p>
+
+      <p>
+        Cảm ơn các bạn vì đã góp phần làm cho lớp mình trở nên vui vẻ
+        và đáng nhớ hơn. Chúc các bạn có một ngày 20/10 thật ý nghĩa,
+        nhận được nhiều lời chúc và những món quà dễ thương nhé!
+      </p>
+
+      <p>
+        <strong>
+          Chúc các bạn nữ luôn hạnh phúc, vui vẻ và mãi là
+          những bông hoa rực rỡ nhất! 🌷
+        </strong>
+      </p>
+
+      <p class="signature">
+        Thân mến! Các bạn nam trong lớp ❤️
+      </p>
+    </div>
+
+    <p>Chúc mừng 20/10! 💐</p>
+    <button class="btn" onclick="restart()">Xem lại từ đầu 💞</button>
+  </div>
+</section>
+
+<!-- HỘP HIỂN THỊ LỜI CHÚC -->
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="emoji" id="mEmoji">💗</div>
+    <h2 id="mTitle"></h2>
+    <p id="mText"></p>
+    <button class="btn" onclick="closeModal()">Cảm ơn nhé 💕</button>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const screens = [
+  "intro",
+  "heartScreen",
+  "treeScreen",
+  "meteorScreen",
+  "finalScreen"
+];
+
+let collected = 0;
+let openedFlowers = new Set();
+let heartTimer;
+
+const wishes = [
+  [
+    "🌷",
+    "Chúc bạn luôn rạng rỡ!",
+    "Chúc bạn luôn xinh tươi, vui vẻ và tự tin tỏa sáng theo cách riêng của mình. Mong mỗi ngày đều có thật nhiều tiếng cười và những điều ngọt ngào!"
+  ],
+  [
+    "📚",
+    "Chúc bạn học giỏi!",
+    "Chúc bạn luôn chăm chỉ, vững tin và đạt được những kết quả thật đáng tự hào. Mong mọi ước mơ của bạn đều dần trở thành hiện thực!"
+  ],
+  [
+    "🍀",
+    "Chúc bạn gặp nhiều may mắn!",
+    "Mong may mắn và hạnh phúc luôn đồng hành cùng bạn. Hãy luôn giữ nụ cười trên môi và ở bên những người trân trọng bạn nhé!"
+  ]
+];
+
+const flowerNotes = [
+  [
+    "🌸",
+    "Lời nhắn từ các bạn nam",
+    "Chúc các bạn luôn vui vẻ, tự tin và giữ mãi sự đáng yêu của mình. Cảm ơn các bạn đã làm cho lớp 12A có thêm thật nhiều tiếng cười. Mong chúng ta sẽ cùng tạo nên những kỉ niệm thật đẹp!"
+  ],
+  [
+    "💐",
+    "Một lời chúc chân thành",
+    "Chúc các bạn luôn mạnh mẽ theo đuổi ước mơ, gặp nhiều điều may mắn và đạt kết quả thật tốt trong học tập. Mong chúng ta luôn nhớ về nhau với những nụ cười thật tươi!"
+  ]
+];
+
+function showScreen(id) {
+  screens.forEach(screen => {
+    $(screen).classList.toggle("active", screen === id);
+  });
+}
+
+function openModal(emoji, title, text) {
+  $("mEmoji").textContent = emoji;
+  $("mTitle").textContent = title;
+  $("mText").textContent = text;
+  $("modal").classList.add("show");
+}
+
+function closeModal() {
+  $("modal").classList.remove("show");
+}
+
+$("modal").addEventListener("click", event => {
+  if (event.target === $("modal")) closeModal();
+});
+
+/* TRÁI TIM RƠI */
+
+function startGame() {
+  showScreen("heartScreen");
+  heartTimer = setInterval(spawnHeart, 850);
+  spawnHeart();
+}
+
+function spawnHeart() {
+  if (!$("heartScreen").classList.contains("active")) return;
+  if (collected >= 3) return;
+
+  const heart = document.createElement("button");
+  heart.className = "heart";
+  heart.textContent = ["💗", "💖", "💘", "💕"][
+    Math.floor(Math.random() * 4)
+  ];
+
+  heart.style.left = (5 + Math.random() * 83) + "%";
+  heart.style.setProperty(
+    "--duration",
+    (5 + Math.random() * 2) + "s"
+  );
+
+  heart.onclick = () => {
+    if (collected >= 3) return;
+
+    const wish = wishes[collected];
+    collected++;
+
+    $("count").textContent = collected;
+    $("bar").style.width = (collected / 3 * 100) + "%";
+
+    heart.remove();
+    openModal(...wish);
+
+    if (collected === 3) {
+      clearInterval(heartTimer);
+
+      setTimeout(() => {
+        if ($("heartScreen").classList.contains("active")) {
+          showScreen("treeScreen");
+          dropFlowers();
+        }
+      }, 1400);
+    }
+  };
+
+  $("field").appendChild(heart);
+  setTimeout(() => heart.remove(), 7500);
+}
+
+/* HOA RƠI */
+
+function dropFlowers() {
+  if ($("tree").dataset.dropped) return;
+  $("tree").dataset.dropped = "true";
+
+  [0, 1].forEach((index) => {
+    setTimeout(() => {
+      const flower = document.createElement("button");
+      flower.className = "falling-flower";
+      flower.textContent = "💗";
+      flower.style.left = index === 0 ? "25%" : "65%";
+      flower.onclick = () => openFlower(index);
+
+      $("tree").appendChild(flower);
+      setTimeout(() => flower.remove(), 3700);
+    }, 1600 + index * 1200);
+  });
+}
+
+/* LỜI NHẮN TRONG HOA */
+
+function openFlower(index) {
+  if (openedFlowers.has(index)) {
+    openModal(
+      "💗",
+      "Một lời nhắn yêu thương",
+      "Hãy giữ lời chúc này như một món quà nhỏ từ các bạn nam lớp 12A nhé!"
+    );
+    return;
+  }
+
+  openedFlowers.add(index);
+  openModal(...flowerNotes[index]);
+
+  if (openedFlowers.size === 2) {
+    $("flowerStatus").textContent =
+      "Hai lời nhắn đã được mở! Điều ước sao băng đang đến.";
+    $("toStar").style.display = "inline-block";
+  }
+}
+
+/* SAO BĂNG VÀ VỆT SÁNG */
+
+function showMeteor() {
+  showScreen("meteorScreen");
+  setTimeout(launchMeteor, 400);
+}
+
+function launchMeteor() {
+  const area = $("meteorArea");
+  area.innerHTML = "";
+
+  const meteor = document.createElement("button");
+  meteor.className = "meteor";
+  meteor.textContent = "⭐";
+  meteor.setAttribute("aria-label", "Chạm vào sao băng");
+
+  meteor.onclick = () => {
+    meteor.remove();
+    showScreen("finalScreen");
+    makeHeartRain();
+  };
+
+  area.appendChild(meteor);
+
+  setTimeout(() => {
+    if (meteor.isConnected) meteor.remove();
+  }, 3700);
+}
+
+/* HIỆU ỨNG TIM BAY */
+
+function makeHeartRain() {
+  for (let i = 0; i < 28; i++) {
+    const item = document.createElement("span");
+    item.textContent = ["💗", "✨", "🌸", "💕"][i % 4];
+
+    item.style.cssText = `
+      position:fixed;
+      z-index:5;
+      left:${Math.random() * 100}%;
+      top:-30px;
+      font-size:${16 + Math.random() * 20}px;
+      pointer-events:none;
+      animation:falling ${4 + Math.random() * 4}s linear forwards;
+    `;
+
+    document.body.appendChild(item);
+    setTimeout(() => item.remove(), 8500);
+  }
+}
+
+/* TẠO BẦU TRỜI LẤP LÁNH */
+
+for (let i = 0; i < 100; i++) {
+  const star = document.createElement("i");
+  star.className = "star";
+
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay = Math.random() * 3 + "s";
+  star.style.opacity = 0.2 + Math.random() * 0.8;
+
+  $("sky").appendChild(star);
+}
+
+/* CHƠI LẠI */
+
+function restart() {
+  clearInterval(heartTimer);
+
+  collected = 0;
+  openedFlowers.clear();
+
+  $("count").textContent = "0";
+  $("bar").style.width = "0";
+  $("field").innerHTML = "";
+  $("tree").dataset.dropped = "";
+
+  $("tree").querySelectorAll(".falling-flower")
+    .forEach(flower => flower.remove());
+
+  $("flowerStatus").textContent =
+    "Nhấn vào hai bông hoa để mở lời nhắn.";
+
+  $("toStar").style.display = "none";
+
+  showScreen("intro");
+}
+</script>
+</body>
+</html>
